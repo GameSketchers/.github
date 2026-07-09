@@ -2,22 +2,25 @@ name: Generate Snake Animation
 
 on:
   schedule:
-    # Runs automatically every 12 hours
+    # Her 12 saatte bir otomatik çalışır
     - cron: "0 */12 * * *" 
-  workflow_dispatch:
+  workflow_dispatch: # Manuel tetikleme için
   push:
     branches:
-    - main
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    # GitHub Token'a yazma yetkisi veriyoruz
+    permissions:
+      contents: write
+    
     steps:
       - uses: actions/checkout@v3
       
       - uses: Platane/snk@v3
         with:
-          # Your GitHub Organization Name
           github_user_name: GameSketchers
           outputs: |
             dist/github-contribution-grid-snake.svg
